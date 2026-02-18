@@ -72,6 +72,23 @@ export function Navbar() {
 
           <div className="hidden md:flex items-center space-x-4">
             <LanguageSwitcher />
+            {user ? (
+              <Button 
+                variant="ghost" 
+                onClick={() => (window.location.href = "/api/logout")}
+                className="rounded-full px-6 text-slate-600 hover:text-primary transition-all duration-300"
+              >
+                Logout
+              </Button>
+            ) : (
+              <Button 
+                variant="ghost" 
+                onClick={() => (window.location.href = "/api/login")}
+                className="rounded-full px-6 text-slate-600 hover:text-primary transition-all duration-300"
+              >
+                Login
+              </Button>
+            )}
             <Link href="/donate">
               <Button className="rounded-full px-6 bg-secondary hover:bg-secondary/90 text-white shadow-lg shadow-secondary/25 hover:shadow-secondary/40 hover:-translate-y-0.5 transition-all duration-300">
                 {t('nav.donate', 'Donate Now')}
@@ -118,7 +135,24 @@ export function Navbar() {
               Admin Dashboard
             </Link>
           )}
-          <div className="pt-2">
+          <div className="pt-2 space-y-2">
+            {!user ? (
+              <Button 
+                variant="outline"
+                onClick={() => (window.location.href = "/api/login")}
+                className="w-full rounded-xl py-6 text-lg"
+              >
+                Login
+              </Button>
+            ) : (
+              <Button 
+                variant="outline"
+                onClick={() => (window.location.href = "/api/logout")}
+                className="w-full rounded-xl py-6 text-lg"
+              >
+                Logout
+              </Button>
+            )}
             <Link href="/donate" onClick={() => setIsOpen(false)}>
               <Button className="w-full rounded-xl bg-secondary hover:bg-secondary/90 text-white py-6 text-lg shadow-lg">
                 {t('nav.donate', 'Donate Now')}
