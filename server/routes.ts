@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { setupAuth, registerAuthRoutes } from "./replit_integrations/auth";
+import { setupAuth, registerAuthRoutes, isAuthenticated } from "./replit_integrations/auth";
 import { api } from "@shared/routes";
 import { z } from "zod";
 
@@ -54,10 +54,22 @@ export async function registerRoutes(
     }
   });
 
-  app.get(api.donations.list.path, async (req, res) => {
-      // In a real app, this should be protected
+  app.get(api.donations.list.path, isAuthenticated, async (req: any, res) => {
+    const userId = req.user.claims.sub;
+    const user = await storage.getUser(userId);
+    
+    if (user?.role === 'admin') {
       const donations = await storage.getDonations();
-      res.json(donations);
+      return res.json(donations);
+    }
+    
+    // For regular donors, return only their donations
+    if (user?.email) {
+      const donations = await storage.getDonationsByEmail(user.email);
+      return res.json(donations);
+    }
+    
+    res.json([]);
   });
 
   // Events

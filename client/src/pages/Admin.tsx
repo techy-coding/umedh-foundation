@@ -11,12 +11,16 @@ export default function Admin() {
   const { data: donations } = useDonations();
 
   useEffect(() => {
-    if (!authLoading && !user) {
-      window.location.href = "/api/login";
+    if (!authLoading) {
+      if (!user) {
+        window.location.href = "/api/login";
+      } else if (user.role !== 'admin') {
+        setLocation("/");
+      }
     }
-  }, [user, authLoading]);
+  }, [user, authLoading, setLocation]);
 
-  if (authLoading || !user) {
+  if (authLoading || !user || user.role !== 'admin') {
     return <div className="h-screen flex items-center justify-center"><Loader2 className="animate-spin" /></div>;
   }
 

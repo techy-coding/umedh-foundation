@@ -34,6 +34,7 @@ export interface IStorage extends IAuthStorage {
   // Donations
   createDonation(donation: InsertDonation): Promise<Donation>;
   getDonations(): Promise<Donation[]>;
+  getDonationsByEmail(email: string): Promise<Donation[]>;
 
   // Events
   getEvents(): Promise<Event[]>;
@@ -81,6 +82,10 @@ export class DatabaseStorage implements IStorage {
 
   async getDonations(): Promise<Donation[]> {
       return await db.select().from(donations).orderBy(desc(donations.createdAt));
+  }
+
+  async getDonationsByEmail(email: string): Promise<Donation[]> {
+      return await db.select().from(donations).where(eq(donations.donorEmail, email)).orderBy(desc(donations.createdAt));
   }
 
   // Events

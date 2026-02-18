@@ -1,0 +1,269 @@
+
+
+# 🌟 Umedh Foundation – Role Wise Explanation
+
+The system will have **4 main roles**:
+
+1. Visitor (Public User)
+2. Donor
+3. Volunteer
+4. Admin
+
+---
+
+# 1️⃣ 👥 VISITOR (Public User)
+
+This is anyone visiting the website without login.
+
+### ✅ What Visitor Can Do:
+
+### 🏠 Browse Website
+
+* View Home page
+* Read About Us
+* Explore Programs & Projects
+* View Gallery
+* Read Blogs
+* Check Upcoming Events
+
+### 🌍 Change Language
+
+* Switch between English / Hindi / Marathi
+* View translated content instantly
+
+### 🔎 Search Content
+
+* Search blog posts
+* Search programs
+* Filter events
+
+### 💳 Start Donation
+
+* Click “Donate Now”
+* Choose amount
+* Select campaign
+* Proceed to payment
+
+### 🙋 Apply as Volunteer
+
+* Fill volunteer registration form
+* Upload resume
+* Submit application
+
+### 📩 Contact Foundation
+
+* Submit contact form
+* Click WhatsApp chat
+* View Google Map location
+
+Visitor does NOT need login.
+
+---
+
+# 2️⃣ 💰 DONOR ROLE
+
+A donor is someone who makes a donation.
+Login is optional but recommended for tracking.
+
+### ✅ Donor Features:
+
+### 💳 Make Donation
+
+* One-time or recurring donation
+* Select specific campaign
+* Choose payment method (UPI, Card, Net Banking)
+
+### 🧾 Donation Receipt
+
+* Auto-generated receipt (PDF)
+* Email confirmation
+* View donation history (if logged in)
+
+### 📊 Track Impact
+
+* See campaign progress bar
+* See total funds raised
+* Transparency breakdown
+
+### 👤 Donor Dashboard (If Account Created)
+
+* View donation history
+* Download old receipts
+* Update profile
+* Manage recurring donations
+
+---
+
+# 3️⃣ 🙋‍♀️ VOLUNTEER ROLE
+
+Volunteer can create account after applying.
+
+### ✅ Volunteer Features:
+
+### 📝 Register
+
+* Fill personal details
+* Mention skills
+* Select availability
+* Upload resume
+
+### 📅 Join Events
+
+* Register for events
+* Get event confirmation email
+* Receive reminder notifications
+
+### 👤 Volunteer Dashboard
+
+* View upcoming events
+* Track events participated
+* Track volunteer hours
+* Update profile
+
+### 📧 Communication
+
+* Receive emails about new campaigns
+* Receive volunteer announcements
+
+---
+
+# 4️⃣ 🔐 ADMIN ROLE (Super Important)
+
+Admin controls the entire system.
+
+### 🔑 Admin Login Required
+
+### 📊 Admin Dashboard Overview
+
+* Total Donations
+* Total Volunteers
+* Total Events
+* Active Campaigns
+* Monthly Revenue Graph
+
+---
+
+## 🛠 Admin Permissions
+
+### 💰 Manage Donations
+
+* View all donation records
+* Filter by date / campaign
+* Export to Excel / PDF
+* Verify payments
+* Issue manual receipts
+
+### 🙋 Manage Volunteers
+
+* View applications
+* Approve / Reject
+* Assign to events
+* Send custom email
+
+### 📅 Manage Events
+
+* Add new event
+* Edit event details
+* Upload event images
+* Delete event
+* View registered participants
+
+### 📰 Manage Blog
+
+* Add new blog
+* Edit / Delete blog
+* Upload featured image
+* Manage categories
+
+### 🖼 Manage Gallery
+
+* Upload photos
+* Create categories
+* Delete media
+
+### 🌍 Manage Languages
+
+* Update translation content
+* Add new language
+
+### 📂 Manage Documents
+
+* Upload annual report
+* Upload certificates
+* Upload policy documents
+
+### 📧 Email Management
+
+* Send newsletter
+* Create custom campaign email
+
+---
+
+# 🔒 Role Based Access Control (RBAC)
+
+| Feature            | Visitor | Donor    | Volunteer | Admin     |
+| ------------------ | ------- | -------- | --------- | --------- |
+| View Content       | ✅       | ✅        | ✅         | ✅         |
+| Donate             | ✅       | ✅        | ❌         | View Only |
+| Volunteer Register | ✅       | ❌        | ✅         | Manage    |
+| Manage Events      | ❌       | ❌        | ❌         | ✅         |
+| Manage Donations   | ❌       | View Own | ❌         | ✅         |
+| Manage Blog        | ❌       | ❌        | ❌         | ✅         |
+
+---
+
+# 🏗 Technical Role Handling
+
+Backend will implement:
+
+* JWT Authentication
+* Role field in database:
+
+  * role: "visitor"
+  * role: "donor"
+  * role: "volunteer"
+  * role: "admin"
+
+Middleware checks:
+
+* Only admin can access /admin routes
+* Only volunteer can access volunteer dashboard
+* Only donor can view donation history
+
+---
+
+# 🔥 Advanced Upgrade (Optional)
+
+Add one more role:
+
+## 🧑‍💼 Sub-Admin / Event Manager
+
+* Can manage events only
+* Cannot access donation data
+* Limited permissions
+
+---
+
+# 🎯 Final System Structure
+
+Frontend:
+
+* React
+* Language context
+* Role-based routing
+
+Backend:
+
+* Node + Express
+* Role validation middleware
+
+Database:
+
+* Users collection (role-based)
+* Donations collection
+* Events collection
+* Blogs collection
+
+---
+
+

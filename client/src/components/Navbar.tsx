@@ -56,7 +56,7 @@ export function Navbar() {
               </Link>
             ))}
             
-            {user && (
+            {user && user.role === 'admin' && (
                <Link 
                 href="/admin" 
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
@@ -109,7 +109,7 @@ export function Navbar() {
               {link.label}
             </Link>
           ))}
-          {user && (
+          {user && user.role === 'admin' && (
              <Link 
               href="/admin" 
               onClick={() => setIsOpen(false)}
