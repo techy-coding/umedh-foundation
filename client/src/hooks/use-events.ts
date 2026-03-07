@@ -1,5 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { api, buildUrl, type InsertEventRegistration } from "@shared/routes";
+import { api, buildUrl } from "@shared/routes";
+import { type InsertEventRegistration } from "@shared/schema";
 
 export function useEvents() {
   return useQuery({
@@ -35,6 +36,7 @@ export function useRegisterEvent(eventId: number) {
       const url = buildUrl(api.events.register.path, { id: eventId });
       const res = await fetch(url, {
         method: "POST",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });

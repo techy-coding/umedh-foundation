@@ -1,5 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { api, type InsertProgram } from "@shared/routes";
+import { api } from "@shared/routes";
+import { type InsertProgram } from "@shared/schema";
 
 export function usePrograms() {
   return useQuery({

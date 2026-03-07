@@ -2,8 +2,10 @@ import { useEvents } from "@/hooks/use-events";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { Calendar, MapPin, Loader2 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export default function Events() {
+  const { t } = useTranslation();
   const { data: events, isLoading } = useEvents();
 
   if (isLoading) return <div className="h-screen flex items-center justify-center"><Loader2 className="animate-spin text-primary" /></div>;
@@ -12,9 +14,9 @@ export default function Events() {
     <div className="min-h-screen bg-slate-50">
       <section className="bg-primary/5 py-20">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold font-display text-slate-900 mb-4">Events & Workshops</h1>
+          <h1 className="text-4xl md:text-5xl font-bold font-display text-slate-900 mb-4">{t("events.title", "Events & Workshops")}</h1>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-            Join our upcoming events to learn, contribute, and connect with the community.
+            {t("events.subtitle", "Join our upcoming events to learn, contribute, and connect with the community.")}
           </p>
         </div>
       </section>
@@ -42,7 +44,7 @@ export default function Events() {
                 <div className="mt-auto">
                   <Link href={`/events/${event.slug}`}>
                     <Button variant="outline" className="rounded-lg border-primary text-primary hover:bg-primary hover:text-white">
-                      View Details & Register
+                      {t("events.viewRegister", "View Details & Register")}
                     </Button>
                   </Link>
                 </div>

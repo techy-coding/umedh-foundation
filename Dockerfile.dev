@@ -1,0 +1,17 @@
+FROM node:20-bullseye-slim
+
+WORKDIR /app
+
+ENV NODE_ENV=development
+
+# copy package files first to leverage Docker cache
+COPY package.json package-lock.json* ./
+
+RUN npm install --no-audit --no-fund
+
+# copy rest of the app
+COPY . .
+
+EXPOSE 5001
+
+CMD ["npm", "run", "dev"]

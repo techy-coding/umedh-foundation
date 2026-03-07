@@ -57,6 +57,24 @@
   }
 }
 
+@layer components {
+  .admin-form input:not([type="checkbox"]):not([type="radio"]),
+  .admin-form select,
+  .admin-form textarea {
+    @apply bg-white text-slate-900 border-slate-300 placeholder:text-slate-400;
+  }
+
+  .admin-form input:not([type="checkbox"]):not([type="radio"]):focus,
+  .admin-form select:focus,
+  .admin-form textarea:focus {
+    @apply outline-none ring-2 ring-sky-500/30 border-sky-400;
+  }
+
+  .admin-form select option {
+    @apply bg-white text-slate-900;
+  }
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;

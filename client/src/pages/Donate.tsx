@@ -44,19 +44,20 @@ export default function Donate() {
   });
 
   const onSubmit = (data: DonateForm) => {
-    // In a real app, this would integrate with Razorpay/Stripe
-    // Here we simulate the donation creation
     createDonation({
       ...data,
       amount: data.amount * 100, // convert to paise/cents
       currency: "INR",
       programId: data.programId === "general" ? undefined : Number(data.programId),
     }, {
-      onSuccess: () => {
+      onSuccess: (donation) => {
         toast({
-          title: "Thank you for your donation!",
-          description: "We have received your contribution.",
+          title: "Donation successful (Demo Payment)",
+          description: "Your receipt download has started.",
         });
+        if (donation?.receiptUrl) {
+          window.open(donation.receiptUrl, "_blank");
+        }
         form.reset();
       },
     });
@@ -128,10 +129,10 @@ export default function Donate() {
                   onValueChange={(val) => form.setValue("programId", val)} 
                   defaultValue={programIdParam || "general"}
                 >
-                  <SelectTrigger className="h-12 rounded-xl border-slate-200">
+                  <SelectTrigger className="h-12 rounded-xl border-slate-200 bg-white text-slate-900">
                     <SelectValue placeholder="Select a cause" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="bg-white text-slate-900 border-slate-200">
                     <SelectItem value="general">General Fund (Where needed most)</SelectItem>
                     {programs?.map(p => (
                       <SelectItem key={p.id} value={String(p.id)}>{p.title}</SelectItem>
@@ -165,7 +166,7 @@ export default function Donate() {
 
               <div className="flex items-center justify-center text-sm text-slate-500 space-x-2">
                 <ShieldCheck className="w-4 h-4 text-green-500" />
-                <span>Secure payment powered by Stripe/Razorpay</span>
+                <span>Demo payment mode enabled (no real gateway)</span>
               </div>
             </form>
           </div>

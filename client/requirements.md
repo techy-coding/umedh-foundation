@@ -15,4 +15,4 @@ tailwind-merge | Class merging
 - Theme colors: Sky Blue (Primary), Green (Secondary/Accent), White (Background)
 - Fonts: 'Outfit' for headings, 'Inter' for body
 - Mock payment integration for donation
-- Admin dashboard is protected by Replit Auth
+- Admin dashboard is protected by password-based authentication

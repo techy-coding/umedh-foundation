@@ -40,11 +40,12 @@ Preferred communication style: Simple, everyday language.
 - **Tables**: users, sessions, programs, donations, events, event_registrations, volunteers, blog_posts, contact_messages
 
 ### Authentication & Authorization
-- **Auth Provider**: Replit Auth (OpenID Connect)
+- **Auth Provider**: Password-based authentication using Passport Local Strategy
 - **Session Storage**: PostgreSQL-backed sessions via connect-pg-simple, stored in a `sessions` table
 - **User Roles**: visitor (default), donor, volunteer, admin — stored in the `users` table `role` column
-- **Admin Protection**: Admin dashboard checks user role client-side and redirects non-admin users. Server-side uses `isAuthenticated` middleware from Replit Auth integration
-- **Important**: The `users` and `sessions` tables are mandatory for Replit Auth and should not be dropped
+- **Admin Protection**: Admin dashboard checks user role client-side and redirects non-admin users. Server-side uses `isAuthenticated` and `isAdmin` middleware
+- **Password Storage**: Admin passwords are hashed using bcryptjs before storage in the `users` table `password_hash` column
+- **Login**: Admin users can log in at `/login` with email and password
 
 ### Shared Code Pattern
 - `shared/schema.ts`: Drizzle table definitions and Zod insert schemas (shared between server and client)
@@ -68,13 +69,13 @@ Preferred communication style: Simple, everyday language.
 
 ### Required Services
 - **PostgreSQL Database**: Required. Connection via `DATABASE_URL` environment variable. Used for all data storage and session management
-- **Replit Auth (OIDC)**: Authentication provider. Requires `ISSUER_URL`, `REPL_ID`, and `SESSION_SECRET` environment variables
 
 ### Key NPM Packages
 - **drizzle-orm** + **drizzle-kit**: Database ORM and migration tooling
 - **express** + **express-session**: HTTP server and session handling
 - **connect-pg-simple**: PostgreSQL session store
-- **passport** + **openid-client**: OIDC authentication flow
+- **passport** + **passport-local**: Password-based authentication
+- **bcryptjs**: Password hashing
 - **zod** + **drizzle-zod**: Schema validation (shared client/server)
 - **i18next** + **react-i18next**: Internationalization
 - **framer-motion**: Animations
@@ -86,5 +87,3 @@ Preferred communication style: Simple, everyday language.
 ### Environment Variables Required
 - `DATABASE_URL` — PostgreSQL connection string
 - `SESSION_SECRET` — Secret for session encryption
-- `REPL_ID` — Replit environment identifier (for auth)
-- `ISSUER_URL` — OIDC issuer URL (defaults to `https://replit.com/oidc`)

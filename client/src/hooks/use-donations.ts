@@ -1,5 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { api, type InsertDonation } from "@shared/routes";
+import { api } from "@shared/routes";
+import { type InsertDonation } from "@shared/schema";
 
 export function useDonations() {
   return useQuery({
@@ -18,6 +19,7 @@ export function useCreateDonation() {
     mutationFn: async (data: InsertDonation) => {
       const res = await fetch(api.donations.create.path, {
         method: "POST",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
@@ -26,6 +28,7 @@ export function useCreateDonation() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [api.donations.list.path] });
+      queryClient.invalidateQueries({ queryKey: [api.programs.list.path] });
     },
   });
 }

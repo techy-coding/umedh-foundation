@@ -1,10 +1,10 @@
 import { Link } from "wouter";
-import { type ProgramResponse } from "@shared/routes";
+import { type Program } from "@shared/schema";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Target } from "lucide-react";
 
 interface ProgramCardProps {
-  program: ProgramResponse;
+  program: Program;
 }
 
 export function ProgramCard({ program }: ProgramCardProps) {

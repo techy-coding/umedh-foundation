@@ -173,7 +173,9 @@ export default function Home() {
               <h2 className="text-4xl font-bold font-display text-slate-900 mt-4">Upcoming Events</h2>
             </div>
             <Link href="/events" className="hidden md:block">
-              <Button variant="link" className="text-primary text-lg">See All Events →</Button>
+              <Button variant="ghost" className="text-primary text-lg p-0 font-semibold hover:text-primary/90 hover:bg-transparent">
+                See All Events →
+              </Button>
             </Link>
           </div>
 

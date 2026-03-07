@@ -1,0 +1,5 @@
+
+> rest-express@1.0.0 dev
+> NODE_ENV=development node ./node_modules/tsx/dist/cli.mjs server/index.ts
+
+2:01:54 AM [express] serving on port 5001

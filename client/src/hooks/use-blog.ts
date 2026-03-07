@@ -15,6 +15,7 @@ export function useBlogPosts() {
 export function useBlogPost(slug: string) {
   return useQuery({
     queryKey: [api.blog.get.path, slug],
+    enabled: !!slug,
     queryFn: async () => {
       const url = buildUrl(api.blog.get.path, { slug });
       const res = await fetch(url);
@@ -24,6 +25,5 @@ export function useBlogPost(slug: string) {
       }
       return api.blog.get.responses[200].parse(await res.json());
     },
-    enabled: !!slug,
   });
 }
