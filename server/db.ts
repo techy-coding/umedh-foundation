@@ -10,5 +10,19 @@ if (!process.env.DATABASE_URL) {
   );
 }
 
+if (process.env.DATABASE_URL.includes("[YOUR-PASSWORD]")) {
+  throw new Error(
+    "DATABASE_URL still contains [YOUR-PASSWORD]. Replace it with your real database password.",
+  );
+}
+
+try {
+  new URL(process.env.DATABASE_URL);
+} catch {
+  throw new Error(
+    "DATABASE_URL is not a valid URL. If your password has special characters, URL-encode it.",
+  );
+}
+
 export const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 export const db = drizzle(pool, { schema });
