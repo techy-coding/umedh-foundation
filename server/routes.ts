@@ -272,9 +272,18 @@ export async function registerRoutes(
     }
   });
 
-  // Seed Data
-  await seedDatabase();
-  await storage.reconcileProgramRaisedAmounts();
+  // Seed/reconcile are convenience tasks; don't block production boot on them.
+  if (process.env.NODE_ENV !== "production") {
+    await seedDatabase();
+    await storage.reconcileProgramRaisedAmounts();
+  } else {
+    try {
+      await seedDatabase();
+      await storage.reconcileProgramRaisedAmounts();
+    } catch (error) {
+      console.error("Startup warning: seed/reconcile skipped:", error);
+    }
+  }
 
   return httpServer;
 }
